@@ -1,0 +1,31 @@
+id: appian-detect
+
+info:
+  name: Appian quick detect
+  author: 6mile
+  severity: info
+  metadata:
+    verified: true
+    max-request: 1
+    shodan-query: __appiancsrftoken:
+    shodan-query: set-cookie: __appianCsrfToken=
+  tags: tech,zope
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+
+    matchers-condition: or
+    matchers:
+
+      - type: word
+        part: header
+        words:
+          - "-cookie: __appianCsrfToken:"
+
+      - type: word
+        part: header
+        words:
+          - "set-cookie: __appianCsrfToken="
+
