@@ -14,7 +14,7 @@ info:
     - https://github.com/6mil/azure-detect
   classification:
     cwe-id: CWE-200
-  tags: tech,azure
+  tags: tech,azure,securestack-azure
   metadata:
     max-request: 1
 
@@ -56,10 +56,18 @@ http:
         case-insensitive: true
 
       - type: word
-        name: ARRA
+        name: azure-app-proxy
         part: header
         words:
           - 'AzureAppProxyAnalyticCookie'
+        case-insensitive: true
+
+      - type: word
+        name: azure-arraffinity
+        part: header
+        words:
+          - 'Set-Cookie: ARRAffinity='
+          - 'Set-Cookie: ARRAffinitySameSite='
         case-insensitive: true
 
       - type: word
