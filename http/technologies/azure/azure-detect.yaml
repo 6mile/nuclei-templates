@@ -1,0 +1,84 @@
+# This Nuclei template is a comprehensive way to identify if an application
+# is hosted in Azure or consuming Azure services. It checks for the existance of
+# Azure itself, as well as several services:
+# Azure Front Door, Microsoft Active Directory Federation Services
+
+id: azure-detect
+
+info:
+  name: Azure Detect
+  author: 6mile
+  severity: info
+  description: Detect if Azure is being used in this target application
+  reference:
+    - https://github.com/6mil/azure-detect
+  classification:
+    cwe-id: CWE-200
+  tags: tech,azure,securestack-azure
+  metadata:
+    max-request: 1
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+
+    host-redirects: true
+    max-redirects: 2
+
+    matchers-condition: or
+    matchers:
+
+      - type: word
+        part: header
+        words:
+          - 'X-Ms-Client-Request-Id:'
+          - 'X-Ms-Activity-Id:'
+          - 'X-Ms-Proxy-Data-Center:'
+          - 'X-Ms-Proxy-Connector-Id:'
+          - 'X-Ms-Ests-Server:'
+        case-insensitive: true
+
+      - type: word
+        name: azure-front-door
+        part: header
+        words:
+          - 'X-Azure-Ref:'
+        case-insensitive: true
+
+      - type: word
+        name: azure-functions
+        part: header
+        words:
+          - 'X-Azure-Ref:'
+          - 'X-Ms-Clitelem:'
+          - 'X-Ms-Ests-Server:'
+        case-insensitive: true
+
+      - type: word
+        name: azure-app-proxy
+        part: header
+        words:
+          - 'AzureAppProxyAnalyticCookie'
+        case-insensitive: true
+
+      - type: word
+        name: azure-arraffinity
+        part: header
+        words:
+          - 'Set-Cookie: ARRAffinity='
+          - 'Set-Cookie: ARRAffinitySameSite='
+        case-insensitive: true
+
+      - type: word
+        name: microsoft-ad-federation-service
+        part: header
+        words:
+          - 'X-Ms-Proxy-App-Id:'
+          - 'X-Ms-Proxy-Group-Id:'
+          - 'X-Ms-Proxy-Subscription-Id:'
+          - 'X-Ms-Proxy-Transaction-Id:'
+          - 'X-Ms-Proxy-Service-Name:'
+          - 'X-Ms-Proxy-Data-Center:'
+        case-insensitive: true
+
