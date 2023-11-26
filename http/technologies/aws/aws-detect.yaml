@@ -9,7 +9,7 @@ info:
     - https://github.com/6mile/cloud-headers
   classification:
     cwe-id: CWE-200
-  tags: tech,aws,amazon,graphql,appsync,xray,kms,waf,alb,cloudfront,codebuild,git,api-gateway,dynamodb
+  tags: tech,aws,amazon,graphql,appsync,xray,kms,waf,alb,cloudfront,codebuild,git,api-gateway,dynamodb,aws-tech
   metadata:
     max-request: 1
 

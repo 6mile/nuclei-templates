@@ -12,7 +12,7 @@ info:
      - aws_appsync_graphqlEndpoint:
      - aws_appsync_apiKey:
      - aws_appsync_region:
-  tags: tech,aws,appsync,amazon,graphql
+  tags: tech,aws,appsync,amazon,graphql,aws-tech
 
 http:
   - method: GET
