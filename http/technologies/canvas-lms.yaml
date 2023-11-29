@@ -1,0 +1,36 @@
+id: canvas-lms-detect
+
+info:
+  name: Detect Canvas LMS
+  author: 6mile
+  severity: info
+  description: Detect Canvas LMS
+  reference:
+    - https://github.com/instructure/canvas-lms/wiki/Getting-Help
+  classification:
+    cwe-id: CWE-200
+  metadata:
+    max-request: 1
+  tags: tech,canvas,lms
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+
+    host-redirects: true
+    max-redirects: 2
+
+    matchers-condition: or
+    matchers:
+      - type: word
+        name: Canvas LMS
+        part: header
+        words:
+          - "X-Version: CanvasReverseProxy"
+          - "x-canvas-debug:"
+          - "x-canvas-route:"
+          - "x-machine-name:"
+          - "x-canvas-container:"
+        case-insensitive: true
+
