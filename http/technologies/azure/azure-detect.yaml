@@ -72,6 +72,7 @@ http:
         part: header
         words:
           - 'AzureAppProxyAnalyticCookie'
+          - 'X-Ms-Proxy:'
         case-insensitive: true
 
       - type: word
