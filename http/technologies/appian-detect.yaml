@@ -23,9 +23,28 @@ http:
         part: header
         words:
           - "-cookie: __appianCsrfToken:"
+	case-insensitive: true
 
       - type: word
         part: header
         words:
           - "set-cookie: __appianCsrfToken="
+	case-insensitive: true
 
+      - type: word
+        part: header
+        words:
+          - "X-Appian-Redirect:"
+	case-insensitive: true
+
+      - type: word
+        part: header
+        words:
+          - "Server: Appian Webapp HTTP"
+	case-insensitive: true
+
+      - type: word
+        part: header
+        words:
+          - "Content-Security-Policy-Report-Only: report-to /suite/rest/a/logging/latest/csp/report;"
+	case-insensitive: true
